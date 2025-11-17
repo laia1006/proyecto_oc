@@ -1,0 +1,50 @@
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+#from spotipy.oauth2 import SpotifyOAuth
+import pandas as pd
+
+# ==== AUTENTICACIÓN ====
+
+client_id="8a8a171917f145348da9c075058f0f8f"
+client_secret="a42eb55228864a34b4622130deee2be8"
+auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+sp = spotipy.Spotify(auth_manager=auth_manager)
+
+
+#print("Conexión correcta ✔️")
+
+# ==== BUSCAR AL ARTISTA ====
+artist_name = "Omar Courtz"
+results = sp.search(q=artist_name, type="artist", limit=1)
+
+#print(results)
+
+artist = results["artists"]["items"][0]
+artist_id = artist["id"]
+
+#print(artist)
+
+top_tracks = sp.artist_top_tracks(artist_id, country='US')
+
+tracks_data = []
+
+for track in top_tracks['tracks']:
+    tracks_data.append({
+        "track_name": track["name"],
+        "track_id": track["id"],
+        "popularity": track["popularity"],
+        "release_date": track["album"]["release_date"],
+        "album": track["album"]["name"],
+        "spotify_url": track["external_urls"]["spotify"]
+    })
+
+df_tracks = pd.DataFrame(tracks_data)
+
+print("Canciones encontradas:")
+print(df_tracks)
+
+
+df = pd.read_csv("omar_courtz_dataset.csv") #I have the data in a csv
+
+print(df.head())
+print(df.describe())

@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file_path = "/Users/laiazamora/Desktop/carpeta/proyecto_oc/omar_courtz_dataset.csv"
+file_path = "proyecto_oc/omar_courtz_dataset.csv"
 df = pd.read_csv(file_path)
 
 pink = "#ff69b4"

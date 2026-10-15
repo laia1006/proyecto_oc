@@ -5,8 +5,8 @@ import pandas as pd
 
 # ==== AUTENTICACIÓN ====
 
-client_id="8a8a171917f145348da9c075058f0f8f"
-client_secret="a42eb55228864a34b4622130deee2be8"
+client_id=" "
+client_secret=" "
 auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
